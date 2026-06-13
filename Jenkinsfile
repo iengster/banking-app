@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/<your-org>/banking-app.git'
+                git branch: 'main', url: 'https://github.com/iengster/banking-app.git'
             }
         }
         stage('Build with Maven') {
