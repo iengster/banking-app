@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         DOCKERHUB_CREDS = credentials('dockerhub-creds')
-        IMAGE_NAME = "<your-dockerhub-username>/bankingapp"
+        IMAGE_NAME = "ienglao/bankingapp"
         IMAGE_TAG  = "${BUILD_NUMBER}"
     }
     tools {
@@ -45,7 +45,7 @@ pipeline {
                 sh """
                 ansible-playbook -i /home/ubuntu/ansible/inventory.ini \
                   ansible/deploy.yml \
-                  --extra-vars "dockerhub_user=<your-dockerhub-username> image_tag=${IMAGE_TAG}"
+                  --extra-vars "dockerhub_user=ienglao image_tag=${IMAGE_TAG}"
                 """
             }
         }
