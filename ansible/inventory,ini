@@ -1,0 +1,8 @@
+Jenkins Dashboard → New Item → Pipeline
+Name: banking-app-pipeline
+Pipeline → Definition: Pipeline script from SCM
+SCM: Git
+Repository URL: https://github.com/<your-org>/banking-app.git
+Branch: main
+Script Path: Jenkinsfile
+Save → Build Now
