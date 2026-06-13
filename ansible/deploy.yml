@@ -1,0 +1,41 @@
+---
+- name: Deploy Banking App
+  hosts: appservers
+  become: yes
+  tasks:
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+        update_cache: yes
+
+    - name: Start Docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Install Python Docker module
+      pip:
+        name: docker
+        executable: pip3
+
+    - name: Pull latest image
+      docker_image:
+        name: "{{ dockerhub_user }}/bankingapp:{{ image_tag }}"
+        source: pull
+
+    - name: Remove existing container
+      docker_container:
+        name: bankingapp
+        state: absent
+      ignore_errors: yes
+
+    - name: Run new container
+      docker_container:
+        name: bankingapp
+        image: "{{ dockerhub_user }}/bankingapp:{{ image_tag }}"
+        state: started
+        restart_policy: always
+        ports:
+          - "8989:8989"
