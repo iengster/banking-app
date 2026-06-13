@@ -52,7 +52,7 @@ pipeline {
         stage('Verify Deployment') {
             steps {
                 sh 'sleep 15'
-                sh 'curl -f http://172.31.20.121:8989/bank-api/swagger-ui.html || exit 1'
+		sh 'curl -fL http://172.31.20.121:8989/bank-api/swagger-ui/index.html || exit 1'
             }
         }
     }
